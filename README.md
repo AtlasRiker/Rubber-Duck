@@ -1,5 +1,5 @@
 <h2>Rubber Duck</h2>
-<p>This mod just adds an usable Rubber duck.</p>
+<p>This mod just adds an usable Rubber duck. Updated to 1.18 and 1.19</p>
 <p>It receives/gives redstone signal when using it, so you can use it for circuits too.</p>
 <p>&nbsp;</p>
 <p>The duck spawns in zombies and skeletons with a low probability.</p>
@@ -14,4 +14,4 @@
 <p>&nbsp;</p>
 
 <h4>Original curseforge page:</h4>
-<h2><a href="https://www.curseforge.com/minecraft/mc-mods/rubber-duck">More on curseforge!!</a></h2>
+<h4><a href="https://www.curseforge.com/minecraft/mc-mods/rubber-duck">More on curseforge!!</a></h4
