@@ -3,6 +3,7 @@ package com.github.salvadormg15.rubber_duck.common;
 import com.github.salvadormg15.rubber_duck.client.render.curio.CurioRenderers;
 import com.github.salvadormg15.rubber_duck.common.core.ForgeEventHandler;
 import com.github.salvadormg15.rubber_duck.common.core.Registries;
+import net.minecraft.world.level.block.SeaPickleBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -57,6 +58,7 @@ public class RubberDuck
     	}
     	InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HEAD.getMessageBuilder().cosmetic().build());
     }
+
 }
 
    

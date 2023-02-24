@@ -11,16 +11,21 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DiodeBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -29,13 +34,15 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.ticks.TickPriority;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class RubberDuckBlock extends DiodeBlock {
+public class RubberDuckBlock extends DiodeBlock implements SimpleWaterloggedBlock {
 	public static final BooleanProperty TRIGGERED = BlockStateProperties.TRIGGERED;
+	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final BooleanProperty UNLOCK = BooleanProperty.create("unlock");
 
 	public RubberDuckBlock() {
@@ -45,6 +52,7 @@ public class RubberDuckBlock extends DiodeBlock {
 				.setValue(POWERED, Boolean.valueOf(false))
 				.setValue(TRIGGERED, Boolean.valueOf(false))
 				.setValue(UNLOCK, Boolean.valueOf(false))
+					.setValue(WATERLOGGED, Boolean.valueOf(false))
 				.setValue(FACING, Direction.NORTH)
 		);
 		runCalculations(SHAPE);
@@ -52,7 +60,7 @@ public class RubberDuckBlock extends DiodeBlock {
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(POWERED, TRIGGERED, UNLOCK, FACING);
+		builder.add(POWERED, TRIGGERED, UNLOCK, FACING, WATERLOGGED);
 	}
 
 //  Redstone behavior
@@ -299,4 +307,28 @@ public class RubberDuckBlock extends DiodeBlock {
 	public static double getOnEntitySpawnChance(){
 		return onEntitySpawnChance;
 	}
-}
+
+	public FluidState getFluidState(BlockState pState) {
+		return pState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(pState);
+	}
+
+	public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+		if (!pState.canSurvive(pLevel, pCurrentPos)) {
+			return Blocks.AIR.defaultBlockState();
+		} else {
+			if (pState.getValue(WATERLOGGED)) {
+				pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+			}
+
+			return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+		}
+	}
+
+	@Nullable
+	public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+		BlockState blockstate = pContext.getLevel().getBlockState(pContext.getClickedPos());
+			FluidState fluidstate = pContext.getLevel().getFluidState(pContext.getClickedPos());
+			boolean flag = fluidstate.getType() == Fluids.WATER;
+			return super.getStateForPlacement(pContext).setValue(WATERLOGGED, Boolean.valueOf(flag));
+		}
+	}
