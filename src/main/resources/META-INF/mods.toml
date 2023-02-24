@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/salvadormg15/Rubber-Duck/issues"
 
 [[mods]]
     modId="rubber_duck"
-    version="2.5.0"
+    version="1.19.2-2.1.0"
     displayName="Rubber Duck"
     displayURL="https://github.com/AtlasRiker/Rubber-Duck"
     logoFile="rubber_duck.png"
