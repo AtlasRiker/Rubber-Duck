@@ -5,12 +5,11 @@ issueTrackerURL="https://github.com/salvadormg15/Rubber-Duck/issues"
 
 [[mods]]
     modId="rubber_duck"
-    version="2.0.0-beta"
+    version="2.5.0"
     displayName="Rubber Duck"
-    updateJSONURL="https://gist.githubusercontent.com/salvadormg15/f73e087096fbc1718d101c6d61389352/raw/"
-    displayURL="https://www.curseforge.com/minecraft/mc-mods/rubber-duck"
+    displayURL="https://github.com/AtlasRiker/Rubber-Duck"
     logoFile="rubber_duck.png"
-    authors="Salvadormg15"
+    authors="Atlas Riker, Salvadormg15"
     description="We just need a Rubber Duck to be happy"
 
 [[dependencies.rubber_duck]]
