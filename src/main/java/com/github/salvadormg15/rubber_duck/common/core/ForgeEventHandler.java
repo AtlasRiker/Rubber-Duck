@@ -1,36 +1,36 @@
 package com.github.salvadormg15.rubber_duck.common.core;
 
-import java.util.Random;
-
 import com.github.salvadormg15.rubber_duck.common.RubberDuck;
 import com.github.salvadormg15.rubber_duck.common.RubberDuckBlock;
-
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.monster.SkeletonEntity;
-import net.minecraft.entity.monster.ZombieEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.TableLootEntry;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
+import com.github.salvadormg15.rubber_duck.common.RubberDuckItem;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import static com.github.salvadormg15.rubber_duck.common.RubberDuck.LOGGER;
 
 public class ForgeEventHandler {
 	
 	//Duck Spawn Event
 	@SubscribeEvent
 	public static void onLivingSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
-		LivingEntity entity = event.getEntityLiving();
-		if (entity instanceof ZombieEntity || entity instanceof SkeletonEntity) {
-			Random random = event.getWorld().getRandom();
-			double chance = random.nextDouble();
+		LivingEntity entity = event.getEntity();
+		if (entity instanceof Zombie || entity instanceof Skeleton) {
+			double chance = event.getEntity().getRandom().nextDouble();
 			if (chance <= RubberDuckBlock.getOnEntitySpawnChance()) {
-				if (entity.getItemBySlot(EquipmentSlotType.HEAD).isEmpty()) {
-					entity.setItemSlot(EquipmentSlotType.HEAD, Registries.RUBBER_DUCK_ITEM.get().getDefaultInstance());
+				if (entity.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {
+					entity.setItemSlot(EquipmentSlot.HEAD, Registries.RUBBER_DUCK_ITEM.get().getDefaultInstance());
 				}
 			}
 		}
@@ -39,27 +39,17 @@ public class ForgeEventHandler {
 	//100% duck drop probability
 	@SubscribeEvent
 	public static void onDeathSpecialEvent(LivingDropsEvent event) {
-		LivingEntity entity = event.getEntityLiving();
+		LivingEntity entity = event.getEntity();
 		BlockPos pos = entity.blockPosition();
 		// If it's not a zombie or skeleton returns
-		if (!(entity instanceof ZombieEntity || entity instanceof SkeletonEntity)) {
+		if (!(entity instanceof Zombie || entity instanceof Skeleton)) {
 			return;
 		}
-		if (entity.getItemBySlot(EquipmentSlotType.HEAD).getItem().getRegistryName().getPath()
-				.equals(Registries.RUBBER_DUCK_ITEM.get().getRegistryName().getPath())) {
+
+		if (entity.getItemBySlot(EquipmentSlot.HEAD).getItem().asItem() instanceof RubberDuckItem) {
 			ItemEntity item = new ItemEntity(entity.level, pos.getX(), pos.getY(), pos.getZ(),
 					Registries.RUBBER_DUCK_ITEM.get().getDefaultInstance());
-			int ducks = 0;
-			for (ItemEntity itemen : event.getDrops()) {
-				if (itemen.getItem().getItem().getRegistryName().getPath()
-						.equals(Registries.RUBBER_DUCK_ITEM.get().getRegistryName().getPath())) {
-					ducks++;
-				}
-			}
-			if (ducks == 0) {
-				event.getDrops().add(item);
-				ducks++;
-			}
+			event.getDrops().add(item);
 		}
 	}
 
@@ -70,7 +60,7 @@ public class ForgeEventHandler {
 		String wantedName = "minecraft:chests";
 		if (chestName.equals(wantedName)) {
 			event.getTable().addPool(LootPool.lootPool()
-					.add(TableLootEntry.lootTableReference(new ResourceLocation(RubberDuck.MODID, "chests/rubber_duck")))
+					.add(LootTableReference.lootTableReference(new ResourceLocation(RubberDuck.MODID, "chests/rubber_duck")))
 					.build());
 		}
 	}
