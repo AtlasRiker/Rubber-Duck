@@ -1,6 +1,6 @@
-package com.github.salvadormg15.rubber_duck_rehatched.common;
+package com.github.atlas.rubber_duck_rehatched.common;
 
-import com.github.salvadormg15.rubber_duck_rehatched.common.core.Registries;
+import com.github.atlas.rubber_duck_rehatched.common.core.Registries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -17,6 +17,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DiodeBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -49,6 +50,10 @@ public class RubberDuckBlock extends DiodeBlock {
 		);
 		runCalculations(SHAPE);
 	}
+	public RubberDuckBlock(BlockBehaviour.Properties pProperties) {
+		super(pProperties);
+	}
+
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -299,4 +304,6 @@ public class RubberDuckBlock extends DiodeBlock {
 	public static double getOnEntitySpawnChance(){
 		return onEntitySpawnChance;
 	}
+
+
 }

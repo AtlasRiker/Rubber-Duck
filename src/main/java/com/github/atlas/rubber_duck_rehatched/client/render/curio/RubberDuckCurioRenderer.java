@@ -1,7 +1,7 @@
-package com.github.salvadormg15.rubber_duck_rehatched.client.render.curio;
+package com.github.atlas.rubber_duck_rehatched.client.render.curio;
 
-import com.github.salvadormg15.rubber_duck_rehatched.common.RubberDuckItem;
-import com.github.salvadormg15.rubber_duck_rehatched.common.core.Registries;
+import com.github.atlas.rubber_duck_rehatched.common.RubberDuckItem;
+import com.github.atlas.rubber_duck_rehatched.common.core.Registries;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;

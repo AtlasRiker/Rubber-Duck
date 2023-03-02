@@ -1,8 +1,8 @@
-package com.github.salvadormg15.rubber_duck_rehatched.common.core;
+package com.github.atlas.rubber_duck_rehatched.common.core;
 
-import com.github.salvadormg15.rubber_duck_rehatched.common.RubberDuck;
-import com.github.salvadormg15.rubber_duck_rehatched.common.RubberDuckBlock;
-import com.github.salvadormg15.rubber_duck_rehatched.common.RubberDuckItem;
+import com.github.atlas.rubber_duck_rehatched.common.RubberDuck;
+import com.github.atlas.rubber_duck_rehatched.common.RubberDuckBlock;
+import com.github.atlas.rubber_duck_rehatched.common.RubberDuckItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;

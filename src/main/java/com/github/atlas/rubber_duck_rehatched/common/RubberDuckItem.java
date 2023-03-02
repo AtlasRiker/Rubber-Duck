@@ -1,6 +1,6 @@
-package com.github.salvadormg15.rubber_duck_rehatched.common;
+package com.github.atlas.rubber_duck_rehatched.common;
 
-import com.github.salvadormg15.rubber_duck_rehatched.common.core.Registries;
+import com.github.atlas.rubber_duck_rehatched.common.core.Registries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BlockItem;

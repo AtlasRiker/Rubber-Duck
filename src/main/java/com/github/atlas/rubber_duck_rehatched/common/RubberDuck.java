@@ -1,8 +1,8 @@
-package com.github.salvadormg15.rubber_duck_rehatched.common;
+package com.github.atlas.rubber_duck_rehatched.common;
 
-import com.github.salvadormg15.rubber_duck_rehatched.client.render.curio.CurioRenderers;
-import com.github.salvadormg15.rubber_duck_rehatched.common.core.ForgeEventHandler;
-import com.github.salvadormg15.rubber_duck_rehatched.common.core.Registries;
+import com.github.atlas.rubber_duck_rehatched.client.render.curio.CurioRenderers;
+import com.github.atlas.rubber_duck_rehatched.common.core.ForgeEventHandler;
+import com.github.atlas.rubber_duck_rehatched.common.core.Registries;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;

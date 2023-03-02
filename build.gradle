@@ -6,7 +6,7 @@ plugins {
 }
 
 version = "${minecraft_version}-${mod_version}"
-group = 'com.github.salvadormg15.rubber_duck_rehatched' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'com.github.atlas.rubber_duck_rehatched' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'Rubber_Duck_ReHatched'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Mojang ships Java 8 to end users, so your mod should target Java 8.
