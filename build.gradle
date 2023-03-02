@@ -6,8 +6,8 @@ plugins {
 }
 
 version = "${minecraft_version}-${mod_version}"
-group = 'com.github.salvadormg15.rubber_duck' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'Rubber_Duck'
+group = 'com.github.salvadormg15.rubber_duck_rehatched' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'Rubber_Duck_ReHatched'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Mojang ships Java 8 to end users, so your mod should target Java 8.
 
@@ -94,7 +94,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'rubber_duck', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'rubber_duck_rehatched', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
                 rubber_duck {
@@ -139,7 +139,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "rubber_duck",
+            "Specification-Title": "rubber_duck_rehatched",
             "Specification-Vendor": "rubber_ducksareus",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
